@@ -1,19 +1,14 @@
-
-
-/*  VARIABLES CSS ─
-   Definidas en :root para alcance global (cascada descendente).
-   
-    */
 :root {
-  --color-primario:   #1a1a2e;
-  --color-secundario: #2e7d32;
-  --color-acento:     #4caf50;
-  --color-texto:      #333333;
-  --color-texto-suave:#666666;
-  --color-fondo:      #f9f9f9;
-  --color-blanco:     #ffffff;
-  --color-borde:      #e0e0e0;
+  --color-primario:    #1a1a2e;
+  --color-secundario:  #2e7d32;
+  --color-acento:      #4caf50;
+  --color-texto:       #333333;
+  --color-texto-suave: #666666;
+  --color-fondo:       #f9f9f9;
+  --color-blanco:      #ffffff;
+  --color-borde:       #e0e0e0;
 
+  /* Badges de categoría */
   --badge-lifestyle: #5c35e3;
   --badge-health:    #e53935;
   --badge-gaming:    #f9a825;
@@ -23,10 +18,10 @@
   --font-body:    'Source Sans 3', sans-serif;
 
   /* Espaciado */
-  --gap-sm:   0.75rem;
-  --gap-md:   1.25rem;
-  --gap-lg:   2rem;
-  --radius:   6px;
+  --gap-sm: 0.75rem;
+  --gap-md: 1.25rem;
+  --gap-lg: 2rem;
+  --radius: 6px;
 }
 
 *,
@@ -96,13 +91,11 @@ ul {
   transition: color 0.2s;
 }
 
-/* Pseudo-selector :hover — ESPECIFICIDAD: .nav-links a:hover (0,2,1)
-   Es más específico que .nav-links a (0,1,1), por eso sobreescribe
-   correctamente el color sin necesidad de !important. */
 .nav-links a:hover {
   color: var(--color-secundario);
 }
 
+/* ── 4. MAIN WRAPPER ─────────────────────────────────────── */
 .main-content {
   max-width: 1100px;
   margin: 0 auto;
@@ -171,16 +164,17 @@ ul {
 
 .card-meta {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .content-layout {
   display: grid;
-  grid-template-columns: 1fr 220px;
+  grid-template-columns: 1fr 280px;
   gap: var(--gap-lg);
   align-items: start;
 }
 
+/* ── 7. ARTÍCULOS COLUMNA IZQUIERDA ─────────────────────── */
 .articles-column {
   display: flex;
   flex-direction: column;
@@ -289,15 +283,12 @@ ul {
   transition: background-color 0.2s, color 0.2s;
 }
 
-/* ESPECIFICIDAD: .btn-load-more:hover (0,2,0) supera a .btn-load-more (0,1,0)
-   Gracias a la especificidad del pseudo-selector, el hover cambia el fondo
-   sin necesidad de duplicar o sobreescribir con !important. */
 .btn-load-more:hover {
   background-color: var(--color-primario);
   color: var(--color-blanco);
 }
 
-/* ── 8. SIDEBAR ───────────────────────────────────────────── */
+/*  SIDEBAR  */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -418,8 +409,8 @@ ul {
 }
 
 .recent-thumb {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   object-fit: cover;
   border-radius: var(--radius);
   flex-shrink: 0;
@@ -443,7 +434,7 @@ ul {
   color: var(--color-texto-suave);
 }
 
-/* ── 9. FOOTER ──────────────────────────────────────────── */
+/* FOOTER  */
 .site-footer {
   text-align: center;
   padding: var(--gap-md) var(--gap-lg);
@@ -451,4 +442,118 @@ ul {
   border-top: 1px solid var(--color-borde);
   font-size: 0.8rem;
   color: var(--color-texto-suave);
+}
+
+/* ═════════════════
+   1 RESPONSIVE — Mobile First
+   Breakpoints:
+     tablet  → max-width: 900px
+     mobile  → max-width: 600px
+   ══════════════════*/
+
+/* ── TABLET (≤ 900px)  */
+@media (max-width: 900px) {
+
+  .nav-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.75rem var(--gap-md);
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 0.5rem var(--gap-md);
+  }
+
+  /* Featured cards: 2 columnas, la tercera ocupa ancho completo */
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Layout principal: una sola columna, sidebar va debajo */
+  .content-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sidebar: widgets en fila horizontal */
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+  }
+
+  .widget {
+    flex: 1 1 260px;
+  }
+
+  .article-title {
+    font-size: 1.35rem;
+  }
+}
+
+/* ── MOBILE (≤ 600px) ──────────────────────────────────── */
+@media (max-width: 600px) {
+
+  .main-content {
+    padding: var(--gap-md) var(--gap-sm);
+  }
+
+  .nav-bar {
+    padding: 0.6rem var(--gap-sm);
+  }
+
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-card:last-child {
+    grid-column: auto;
+  }
+
+  .card-image-wrap img {
+    height: 220px;
+  }
+
+  .hero-img {
+    height: 200px;
+  }
+
+  .article-title {
+    font-size: 1.2rem;
+  }
+
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .small-card img {
+    height: 180px;
+  }
+
+  .sidebar {
+    flex-direction: column;
+  }
+
+  .widget {
+    flex: none;
+    width: 100%;
+  }
+
+  .site-footer {
+    padding: var(--gap-sm);
+    font-size: 0.75rem;
+  }
 }

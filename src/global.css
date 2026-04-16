@@ -452,6 +452,9 @@ ul {
    ══════════════════*/
 
 /* ── TABLET (≤ 900px)  */
+/* CASCADA: estas reglas tienen la misma especificidad que las de desktop
+   pero aparecen después dentro de un @media, por eso las sobreescriben
+   correctamente sin necesidad de !important. */
 @media (max-width: 900px) {
 
   .nav-bar {
